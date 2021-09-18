@@ -8,7 +8,20 @@ from clearos_firewall import *
 
 CLEAROS_API_VER = "0.1.0"
 
-app = FastAPI()
+app = FastAPI(
+    title="ClearOS API",
+    description="API for ClearOS 7",
+    version=CLEAROS_API_VER,
+    contact={
+        "name": "deseven",
+        "url": "https://github.com/deseven/clearos-api/",
+        "email": "github@d7.wtf",
+    },
+    license_info={
+        "name": "Unlicense",
+        "url": "https://github.com/deseven/clearos-api/blob/master/LICENSE",
+    }
+)
 
 @app.get("/",response_class=HTMLResponse)
 def read_root():
@@ -17,6 +30,7 @@ def read_root():
         CLEAROS_API_VER + '!<br>' +
         'Browse docs at <a href="/docs">/docs</a>, visit <a href="https://github.com/deseven/clearos-api">github</a> for more info.'
     )
+
 
 ### ClearOS Firewall - incoming allow ###
 
