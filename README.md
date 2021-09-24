@@ -21,7 +21,7 @@ git clone https://github.com/deseven/clearos-api.git
 cd clearos-api
 ```
 
-Edit `config.py` to set up api key and header (if needed). Also edit `systemd/clearos-api.service` if you want to change the port and/or binding address (by default it listens on port 1999 on all interfaces).
+Copy `config_default.py` as `config.py` to set up api key and header (if needed). Also edit `systemd/clearos-api.service` if you want to change the port and/or binding address (by default it listens on port 1999 on all interfaces).
 
 Finally, add the api to systemd, enable autostart and launch it:
 ```bash
@@ -32,7 +32,7 @@ systemctl start clearos-api
 ```
 
 ## Usage
-Go to http://your-clearos-installation:1025 and read the docs there.  
+Go to http://your-clearos-installation:1999 and read the docs there.  
 Don't forget to check that the port is opened in ClearOS itself. By the way you can open it from the api on ClearOS host, just perform this simple request (change the api key and port according to your configuration):
 ```bash
 curl http://localhost:1999/firewall/incoming-allow \

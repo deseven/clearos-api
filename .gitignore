@@ -9,3 +9,4 @@ env3.*
 env
 docs_build
 venv
+config.py

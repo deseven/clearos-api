@@ -34,11 +34,11 @@ def read_root():
 
 ### ClearOS Firewall - incoming allow ###
 
-@app.get('/firewall/incoming-allow',dependencies=[Security(get_api_key)])
+@app.get('/firewall/incoming-allow',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_allow():
     return {"incoming-allow": getFirewall(TYPE_INCOMING_ALLOW)}
 
-@app.post('/firewall/incoming-allow',dependencies=[Security(get_api_key)])
+@app.post('/firewall/incoming-allow',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_allow_post(rule: incoming_allow_rule):
     if existsFirewall(rule.name,TYPE_INCOMING_ALLOW):
         raise HTTPException(
@@ -55,7 +55,7 @@ def incoming_allow_post(rule: incoming_allow_rule):
             detail="Failed inserting rule (unsupported or broken firewall config?)"
         )
 
-@app.delete('/firewall/incoming-allow',dependencies=[Security(get_api_key)])
+@app.delete('/firewall/incoming-allow',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_allow_delete(rule: incoming_allow_rule):
     fw_rule = generateFirewall(rule,TYPE_INCOMING_ALLOW)
     if deleteFirewall(fw_rule):
@@ -69,11 +69,11 @@ def incoming_allow_delete(rule: incoming_allow_rule):
 
 ### ClearOS Firewall - incoming block ###
 
-@app.get('/firewall/incoming-block',dependencies=[Security(get_api_key)])
+@app.get('/firewall/incoming-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_block():
     return {"incoming-block": getFirewall(TYPE_INCOMING_BLOCK)}
 
-@app.post('/firewall/incoming-block',dependencies=[Security(get_api_key)])
+@app.post('/firewall/incoming-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_block_post(rule: incoming_block_rule):
     if existsFirewall(rule.name,TYPE_INCOMING_BLOCK):
         raise HTTPException(
@@ -90,7 +90,7 @@ def incoming_block_post(rule: incoming_block_rule):
             detail="Failed inserting rule (unsupported or broken firewall config?)"
         )
 
-@app.delete('/firewall/incoming-block',dependencies=[Security(get_api_key)])
+@app.delete('/firewall/incoming-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def incoming_block_delete(rule: incoming_block_rule):
     fw_rule = generateFirewall(rule,TYPE_INCOMING_BLOCK)
     if deleteFirewall(fw_rule):
@@ -104,11 +104,11 @@ def incoming_block_delete(rule: incoming_block_rule):
 
 ### ClearOS Firewall - outgoing block ###
 
-@app.get('/firewall/outgoing-block',dependencies=[Security(get_api_key)])
+@app.get('/firewall/outgoing-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def outgoing_block():
     return {"outgoing-block": getFirewall(TYPE_OUTGOING_BLOCK)}
 
-@app.post('/firewall/outgoing-block',dependencies=[Security(get_api_key)])
+@app.post('/firewall/outgoing-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def outgoing_block_post(rule: outgoing_block_rule):
     if existsFirewall(rule.name,TYPE_OUTGOING_BLOCK):
         raise HTTPException(
@@ -125,7 +125,7 @@ def outgoing_block_post(rule: outgoing_block_rule):
             detail="Failed inserting rule (unsupported or broken firewall config?)"
         )
 
-@app.delete('/firewall/outgoing-block',dependencies=[Security(get_api_key)])
+@app.delete('/firewall/outgoing-block',dependencies=[Security(get_api_key)],tags=['firewall'])
 def outgoing_block_delete(rule: outgoing_block_rule):
     fw_rule = generateFirewall(rule,TYPE_OUTGOING_BLOCK)
     if deleteFirewall(fw_rule):
@@ -139,11 +139,11 @@ def outgoing_block_delete(rule: outgoing_block_rule):
 
 ### ClearOS Firewall - port forwarding ###
 
-@app.get('/firewall/port-forwarding',dependencies=[Security(get_api_key)])
+@app.get('/firewall/port-forwarding',dependencies=[Security(get_api_key)],tags=['firewall'])
 def port_forwarding():
     return {"port-forwarding": getFirewall(TYPE_FORWARDING)}
 
-@app.post('/firewall/port-forwarding',dependencies=[Security(get_api_key)])
+@app.post('/firewall/port-forwarding',dependencies=[Security(get_api_key)],tags=['firewall'])
 def port_forwarding_post(rule: port_forwarding_rule):
     if existsFirewall(rule.name,TYPE_FORWARDING):
         raise HTTPException(
@@ -160,7 +160,7 @@ def port_forwarding_post(rule: port_forwarding_rule):
             detail="Failed inserting rule (unsupported or broken firewall config?)"
         )
 
-@app.delete('/firewall/port-forwarding',dependencies=[Security(get_api_key)])
+@app.delete('/firewall/port-forwarding',dependencies=[Security(get_api_key)],tags=['firewall'])
 def port_forwarding_delete(rule: port_forwarding_rule):
     fw_rule = generateFirewall(rule,TYPE_FORWARDING)
     if deleteFirewall(fw_rule):
