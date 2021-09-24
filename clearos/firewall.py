@@ -1,7 +1,7 @@
-TYPE_FORWARDING = 1
-TYPE_INCOMING_ALLOW = 2
-TYPE_INCOMING_BLOCK = 3
-TYPE_OUTGOING_BLOCK = 4
+FIREWALL_FORWARDING = 1
+FIREWALL_INCOMING_ALLOW = 2
+FIREWALL_INCOMING_BLOCK = 3
+FIREWALL_OUTGOING_BLOCK = 4
 FIREWALL_CFG_PATH = '/etc/clearos/firewall.conf'
 
 def getFirewall(fw_type):
@@ -16,7 +16,7 @@ def getFirewall(fw_type):
             break
         if rules_started:
             rule = line.split('|')
-            if fw_type == TYPE_INCOMING_ALLOW and rule[2].endswith('1'):
+            if fw_type == FIREWALL_INCOMING_ALLOW and rule[2].endswith('1'):
                 rules.append({
                     "name":    rule[0],
                     "group":   rule[1],
@@ -24,14 +24,14 @@ def getFirewall(fw_type):
                     "port":    rule[5],
                     "enabled": (True if rule[2][2] == '1' else False)
                 })
-            if fw_type == TYPE_INCOMING_BLOCK and rule[2].endswith('2'):
+            if fw_type == FIREWALL_INCOMING_BLOCK and rule[2].endswith('2'):
                 rules.append({
                     "name":    rule[0],
                     "group":   rule[1],
                     "ip":      rule[4],
                     "enabled": (True if rule[2][2] == '1' else False)
                 })
-            if fw_type == TYPE_OUTGOING_BLOCK and rule[2].endswith('4'):
+            if fw_type == FIREWALL_OUTGOING_BLOCK and rule[2].endswith('4'):
                 rules.append({
                     "name":    rule[0],
                     "group":   rule[1],
@@ -40,7 +40,7 @@ def getFirewall(fw_type):
                     "port":    rule[5],
                     "enabled": (True if rule[2][2] == '1' else False)
                 })
-            if fw_type == TYPE_FORWARDING and rule[2].endswith('8'):
+            if fw_type == FIREWALL_FORWARDING and rule[2].endswith('8'):
                 rules.append({
                     "name":     rule[0],
                     "group":    rule[1],
@@ -99,7 +99,7 @@ def insertFirewall(rule):
 def generateFirewall(rule,fw_type):
     fw_rule = ""
 
-    if fw_type == TYPE_INCOMING_ALLOW:
+    if fw_type == FIREWALL_INCOMING_ALLOW:
         fw_rule = "|".join([
             rule.name,
             (rule.group if rule.group else ""),
@@ -110,7 +110,7 @@ def generateFirewall(rule,fw_type):
             ""
         ])
 
-    if fw_type == TYPE_INCOMING_BLOCK:
+    if fw_type == FIREWALL_INCOMING_BLOCK:
         fw_rule = "|".join([
             rule.name,
             (rule.group if rule.group else ""),
@@ -121,7 +121,7 @@ def generateFirewall(rule,fw_type):
             ""
         ])
 
-    if fw_type == TYPE_OUTGOING_BLOCK:
+    if fw_type == FIREWALL_OUTGOING_BLOCK:
         fw_rule = "|".join([
             rule.name,
             (rule.group if rule.group else ""),
@@ -132,7 +132,7 @@ def generateFirewall(rule,fw_type):
             ""
         ])
 
-    if fw_type == TYPE_FORWARDING:
+    if fw_type == FIREWALL_FORWARDING:
         fw_rule = "|".join([
             rule.name,
             (rule.group if rule.group else ""),
