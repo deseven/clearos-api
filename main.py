@@ -11,7 +11,7 @@ from api.models import *
 from clearos.firewall import *
 from clearos.dhcp import *
 
-CLEAROS_API_VER = "0.1.0"
+CLEAROS_API_VER = "0.2.0"
 
 app = FastAPI(
     title="ClearOS API",
